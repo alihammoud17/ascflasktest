@@ -1,6 +1,5 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Resource, Api, reqparse, abort, fields, marshal_with
-from flask_mongoengine import MongoEngine
 from flask_sqlalchemy import SQLAlchemy
 
 # Create Flask App
