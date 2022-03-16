@@ -1,3 +1,6 @@
+
+createDB.py
+
 __pycache__/
 
 venv/
@@ -6,4 +9,3 @@ cnn-arabic-utf8/
 
 arabic-nlp/
 
-texts.db
