@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse, abort, fields, marshal_with
 from flask_sqlalchemy import SQLAlchemy
+from tokenizer import Tokeniz
 
 # Create Flask App
 app = Flask(__name__)
@@ -28,6 +29,11 @@ class TextModel(db.Model):
 resource_fields = {
     '_id': fields.Integer,
     'text': fields.String
+}
+
+tokenize_resource_fields = {
+    # '_id': fields.Integer,
+    'tokens': fields.List(fields.String)
 }
 
 # REST api methods arguments
@@ -82,7 +88,16 @@ class InputText(Resource):
         return '', 204
 
 
+class TextTokenizer(Resource):
+    @marshal_with(tokenize_resource_fields)
+    def post(self):
+        args = text_post_args.parse_args()
+        return {"tokens": Tokeniz(args['text'])}
+
+
 api.add_resource(InputText, '/texts/<int:text_id>')
+
+api.add_resource(TextTokenizer, '/tokenizer')
 
 # Get all texts
 api.add_resource(TextList, '/texts')
@@ -95,4 +110,4 @@ def hello():
 
 # Main block
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
