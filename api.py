@@ -1,9 +1,12 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse, abort, fields, marshal_with
 from tokenizer import Tokeniz, EntityRecognition
+from flask_cors import CORS
+
 
 # Create Flask App
 app = Flask(__name__)
+CORS(app)
 
 # Application Entry point
 api = Api(app)

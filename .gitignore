@@ -8,3 +8,5 @@ cnn-arabic-utf8/
 arabic-nlp/
 
 createDB.py
+
+.vscode/
