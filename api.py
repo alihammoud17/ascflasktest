@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse, abort, fields, marshal_with
 from tokenizer import Tokeniz, EntityRecognition
+from sentiment_analysis_service import Sentiment_Analysis_Service
 from flask_cors import CORS
+import sklearn
 
 
 # Create Flask App
@@ -105,12 +107,23 @@ class EntityRecogizer(Resource):
         args = text_post_args.parse_args()
         return jsonify({"entities": EntityRecognition(args['text'])})
 
+
+class SentimentAnalyser(Resource):
+    def post(self):
+        args = text_post_args.parse_args()
+        sas = Sentiment_Analysis_Service()
+        predicted_sentiment = sas.predict(args["text"])
+        return jsonify({"sentiment": predicted_sentiment[0]})
+
+
 # api.add_resource(InputText, '/texts/<int:text_id>')
 
 
 api.add_resource(TextTokenizer, '/tokenizer')
 
 api.add_resource(EntityRecogizer, '/ner')
+
+api.add_resource(SentimentAnalyser, "/sentiment")
 
 # Get all texts
 api.add_resource(TextList, '/texts')
