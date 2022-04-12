@@ -4,7 +4,7 @@ import re
 import string
 import nltk
 from nltk.corpus import stopwords
-import numpy
+# import numpy
 # from tashaphyne.stemming import ArabicLightStemmer
 
 # ArListem = ArabicLightStemmer()

@@ -5,3 +5,6 @@ tashaphyne
 nltk
 flask-cors
 qalsadi
+pickle
+re
+string
